@@ -1,14 +1,18 @@
 from ultralytics import YOLO
 import cv2
+import os
 
 # Modeli yükle
 model = YOLO("models/best.pt")
 
-# Kaynak seçimi (0: Webcam, veya 'video.mp4')
+# Kaynak seçimi (0: Webcam, veya 'resim.jpg' / 'video.mp4')
 source = 0 
 
-# Tahmin yap ve göster
+# Tahmin yap
 results = model.predict(source=source, show=True, conf=0.55)
 
-# Çıkış için bir tuşa basılmasını bekle (Resimse)
-cv2.waitKey(0)
+# Eğer kaynak bir resim dosyasıysa, pencereyi açık tut
+if isinstance(source, str) and os.path.isfile(source):
+    print("Kapatmak için herhangi bir tuşa basın...")
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

@@ -4,3 +4,4 @@ __pycache__/
 runs/
 dataset/
 .env
+test_images/
